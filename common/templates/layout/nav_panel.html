@@ -1,0 +1,30 @@
+{% extends 'layout/main.html' %}
+{% load staticfiles %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<div class="main_container">
+  <div class="col-md-3 left_col">
+    {% include 'layout/sidebar.html' %}
+  </div>
+  <div class="top_nav">
+    {% include 'layout/header.html' %}
+  </div>
+  <div class="page right_col">
+    <div class="page-title">
+      <div class="title_left">
+        {% block panelHeader %}
+        {% endblock %}
+      </div>
+    </div>
+    {% block panelBody %}
+    {% endblock %}
+  </div>
+  <footer class="bixin-footer">
+    <div class="content" style="text-align:center; font-size:40px; font-weight:bolder">
+    </div>
+  </footer>
+</div>
+{% endblock %}
+{% block script %}
+{% endblock %}

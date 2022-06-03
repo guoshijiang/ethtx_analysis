@@ -1,0 +1,57 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  om_tags %}
+{% block panelHeader %}
+<h3>交易列表</h3>
+{% endblock %}
+{% block panelBody %}
+<div class="align-self-stretch flex-grow-1 flex-shrink-1 d-block flex-column w-100">
+  <div class="x_panel align-self-stretch flex-grow-1 flex-shrink-1 d-flex flex-column">
+    <div class="x_title flex-grow-0 flex-shrink-0 w-100">
+        <div class="clearfix"></div>
+     </div>
+     <div class="x_content flex-grow-1 flex-shrink-1 w-100 overflow-auto">
+        <div class="dataTables_wrapper form-inline no-footer">
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive" >
+            <table class="table table-striped table-bordered dataTable no-footer" role="grid">
+              <thead>
+                <tr role="row">
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">标注日期</th>
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">内容</th>
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">标注选项</th>
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">标注员</th>
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">检查员</th>
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">标注状态</th>
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">检查状态</th>
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">是否合格</th>
+                  <th class="sorting" tabindex="0" rowspan="1" colSpan="1">导入数据时间</th>
+                </tr>
+              </thead>
+              <tbody>
+               <tr role="row">
+                   <td>1</td>
+                   <td>2</td>
+                   <td>3</td>
+                   <td>4</td>
+                   <td>5</td>
+                   <td>6</td>
+                   <td>7</td>
+                   <td>8</td>
+                   <td>9</td>
+               </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="pull-right">
+          {% include 'select/pagination.html' with items=task_list %}
+        </div>
+      </div>
+    </div>
+     </div>
+  </div>
+</div>
+{% endblock %}

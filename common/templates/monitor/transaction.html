@@ -1,0 +1,218 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  om_tags %}
+{% block panelHeader %}
+<h3>交易细节分析</h3>
+{% endblock %}
+{% block panelBody %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 ">
+            <div class="x_panel">
+                <div class="x_content">
+                    <form action="decoded_transaction" data-parsley-validate class="form-horizontal form-label-left">
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-2 col-sm-2 label-align" for="network">网络<span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 ">
+                                <input type="text" id="network" name="network" required="required" class="form-control ">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-2 col-sm-2 label-align" for="tx_hash">交易Hash<span class="required">*</span>
+                            </label>
+                            <div class="col-md-9 col-sm-9 ">
+                                <input type="text" id="tx_hash" name="tx_hash" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6">
+                            </div>
+                            <div class="col-md-3 col-sm-3 offset-md-3">
+                                <button type="submit" class="btn btn-success">点击查询</button>
+                            </div>
+                              <div class="col-md-6 col-sm-6">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row" style="display: block;">
+      <div class="col-md-12 col-sm-12  ">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>交易信息<small>{{ transaction.tx_hash }} / {{ transaction.chain_id }}</small></h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>交易字段</th>
+                  <th>值</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>交易Hash</td>
+                  <td>{{ transaction.tx_hash }}</td>
+                </tr>
+                <tr>
+                  <td>交易状态</td>
+                  <td>{{ transaction.success }}</td>
+                </tr>
+                <tr>
+                  <td>时间戳</td>
+                  <td>{{ transaction.timestamp }}</td>
+                </tr>
+                <tr>
+                  <td>区块号</td>
+                  <td>{{ transaction.block_number }}</td>
+                </tr>
+                <tr>
+                  <td>from</td>
+                  <td>{{ transaction.sender.address }}</td>
+                </tr>
+                <tr>
+                  <td>to</td>
+                  <td>{{ transaction.receiver.address }}</td>
+                </tr>
+                <tr>
+                  <td>Gas limit</td>
+                  <td>{{ transaction.gas_limit }}</td>
+                </tr>
+                <tr>
+                  <td>Gas used</td>
+                  <td>{{ transaction.gas_used }}</td>
+                </tr>
+                <tr>
+                  <td>Gas price</td>
+                  <td>{{ transaction.gas_price }}</td>
+                </tr>
+                <tr>
+                  <td>交易手续费</td>
+                  <td>{{ eth_fee }}</td>
+                </tr>
+               <tr>
+                  <td>交易索引</td>
+                  <td>{{ transaction.tx_index }}</td>
+                </tr>
+                <tr>
+                  <td>事件数量</td>
+                  <td>{{ events_num }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+   <div class="clearfix"></div>
+   {% if events %}
+    <div class="row" style="display: block;">
+      <div class="col-md-12 col-sm-12  ">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>发出的事件</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>事件索引</th>
+                  <th>事件名称</th>
+                  <th>from</th>
+                  <th>to</th>
+                  <th>金额</th>
+                </tr>
+              </thead>
+              <tbody>
+               {% for event in events %}
+                <tr>
+                  <td>{{ event.index }}</td>
+                  <td>
+                      {% if event.contract.address != '0x0000000000000000000000000000000000000000' %}
+                         {% if event.contract.badge %}
+                             {{ event.contract.badge }}
+                         {% else %}
+                             {{ event.contract.name }}
+                         {% endif %}
+                      {% else %}
+                        {{ event.contract.name }}
+                      {% endif %}
+                      {% if event.event_guessed %}
+                          <span style='color: dodgerblue'>.{{ event.event_name }}</span>
+                      {% else %}
+                          <span style='color: darkgreen'>.{{ event.event_name }}</span>
+                      {% endif %}
+                  </td>
+                  <td>
+
+                  </td>
+
+                  <td>
+
+                  </td>
+                  <td>
+
+                  </td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+{% if balances %}
+    <div class="account-balances">
+        <h3>Account balances:</h3>
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th scope="col">Address</th>
+                <th scope="col">Token</th>
+                <th scope="col">Balance</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for balance in balances %}
+                <tr>
+                   <td> {{ balance }} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+
+{% if transfers %}
+    <div class="transfers">
+        <h3>Token transfers: </h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Sender</th>
+                <th scope="col">Token</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Receiver</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for transfer in transfers %}
+                <tr>
+                   <td>{{ transfer }} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load staticfiles%}
+<div class="left_col scroll-view">
+<!--     <a id="menu_toggle" style="display: inline">-->
+<!--        <i class="fa fa-bars" style="width: 80px; height: 80px;"></i>-->
+<!--    </a>-->
+  <div class="navbar nav_title" style="border:0; text-align:center">
+    <a class="site_title">
+      <div class="sidebar-logo">ETH交易解析器</div>
+    </a>
+  </div>
+  <div class="clearfix"></div>
+  <a class="profile clearfix" href="#">
+    <div class="profile_pic">
+      <img src="{% static 'images/avatar.png' %}" class="img-circle profile_img" />
+    </div>
+    <div class="profile_info"><span>系统信息</span>
+      <h2>版本号：v0.0.1</h2>
+    </div>
+  </a>
+  <br />
+  <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+      <ul class="nav side-menu">
+         <li>
+              <a>
+                <i class="fa fa-btc"></i>交易监控<span class="fa fa-chevron-right pull-right"></span>
+              </a>
+              <ul class="nav child_menu">
+                  <li>
+                      <a href="{% url 'tx_list' %}">交易列表</a>
+                  </li>
+                  <li>
+                      <a href="{% url 'index' %}">细节追踪</a>
+                  </li>
+              </ul>
+         </li>
+      </ul>
+    </div>
+  </div>
+</div>

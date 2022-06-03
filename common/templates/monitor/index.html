@@ -1,0 +1,19 @@
+{% extends 'layout/filter_panel.html' %}
+{% load staticfiles  om_tags %}
+{% block panelHeader %}
+<h3>交易细节</h3>
+{% endblock %}
+
+{% block panelBody %}
+<div class="container">
+    <form class="form-inline d-flex flex-row justify-content-start align-items-end" action="decoded_transaction">
+        <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon"><span class="fa fa-btc"></span><span> 交易ID </span></div>
+              <input type="text" style="width:300px" name="tx_hash" class="form-control" value="{{ tx_hash | default:'' }}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">查询</button>
+    </form>
+</div>
+{% endblock %}

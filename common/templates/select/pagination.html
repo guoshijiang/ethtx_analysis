@@ -1,0 +1,37 @@
+{% load staticfiles om_tags %}
+<div class="dataTables_paginate paging_simple_numbers">
+  <ul class="pagination">
+    {% if items.has_previous %}
+    <li class="paginate_button previous" id="datatable_previous">
+      <a href="{{ items.prefix_uri }}page={{ items.previous_page_number }}" tabindex="0">上一页</a>
+    </li>
+    {% endif %}
+    {% if items.page_range_data.show_first %}
+    <li class="paginate_button">
+      <a href="{{ items.prefix_uri }}page=1" tabindex="0">1</a>
+    </li>
+    {% endif %}
+    {{ items.page_range }}
+    {% for i in items.page_range_data.page_range %}
+      {% if i == items.number or i == page %}
+        <li class="paginate_button active">
+          <a href="{{ items.prefix_uri }}page={{ i }}">{{ i }}</a>
+        </li>
+      {% else %}
+        <li class="paginate_button">
+          <a href="{{ items.prefix_uri }}page={{ i }}">{{ i }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% if items.page_range_data.show_last %}
+    <li class="paginate_button">
+      <a href="{{ items.prefix_uri }}page={{ items.paginator.num_pages }}">{{ items.paginator.num_pages }}</a>
+    </li>
+    {% endif %}
+    {% if items.has_next %}
+    <li class="paginate_button next">
+      <a href="{{ items.prefix_uri }}page={{ items.next_page_number }}">下一页</a>
+    </li>
+    {% endif %}
+  </ul>
+</div>
